@@ -5,15 +5,15 @@ const Footer = React.createClass({
   render () {
     return (
       <footer>
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-4">
               Twitter
             </div>
-            <div class="col-sm-4">
+            <div className="col-sm-4">
               Facebook
             </div>
-            <div class="col-sm-4">
+            <div className="col-sm-4">
               Instagram
             </div>
           </div>
