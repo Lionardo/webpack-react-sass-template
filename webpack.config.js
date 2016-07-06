@@ -1,5 +1,6 @@
 const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
 const path = require('path')
 
 const sassLoaders = [
@@ -9,27 +10,37 @@ const sassLoaders = [
 ]
 
 const config = {
+  devtool: 'eval',
   entry: {
     index: './src/Index'
   },
+  output: {
+    path: path.join(__dirname, './build'),
+    publicPath: '/build',
+    filename: '[name].js'
+  },
+  plugins: [
+    new ExtractTextPlugin('[name].css'),
+    new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15}),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+      output: {
+        comments: false,
+      },
+    })
+  ],
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-        }
+        test: /\.jsx|\.js?$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        include: path.join(__dirname, 'src')
       },
       {
         test: /\.json$/, loader: "json"
-      },
-      {
-        test: /\.js?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader'
       },
       {
         test: /\.sass$/,
@@ -37,14 +48,6 @@ const config = {
       }
     ]
   },
-  output: {
-    filename: '[name].js',
-    path: path.join(__dirname, './build'),
-    publicPath: '/build'
-  },
-  plugins: [
-    new ExtractTextPlugin('[name].css')
-  ],
   postcss: [
     autoprefixer({
       browsers: ['last 2 versions']

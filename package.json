@@ -8,8 +8,8 @@
     "npm": "3.3.9"
   },
   "scripts": {
-    "build": "webpack",
-    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --progress  --colors --inline --port 8000",
+    "build": "webpack --optimize-minimize",
+    "start": "atom . && webpack-dev-server --inline --hot --port 8000",
     "lint": "standard",
     "test": "standard && webpack --bail"
   },
@@ -17,7 +17,7 @@
     "type": "git",
     "url": ""
   },
-  "author": "",
+  "author": "Lionardo",
   "license": "MIT",
   "bugs": {
     "url": ""
