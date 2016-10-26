@@ -23,6 +23,9 @@ You can load your sass directly to your component with sass loader
 
 you can load images to your sass file inside your components. This is why we use img-loader.
 
+##load your image files into your sass files
+Webpack doesn't allow you to use url path to import images, therefore you need to use for example: background-image: require("path to your image");
+
 ## License
 
 Webpack + React + SASS is released under the [MIT License]
